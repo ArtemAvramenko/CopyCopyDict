@@ -25,7 +25,7 @@ namespace CopyCopyDict.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://context.reverso.net/перевод/английский-русский/{0}")]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://context.reverso.net/translation/english-russian/{0}")]
         public string UrlPattern {
             get {
                 return ((string)(this["UrlPattern"]));
