@@ -1,6 +1,6 @@
 ﻿// <copyright file="Program.cs">
 //   CopyCopyDict - Background app that opens a dictionary definition of a selected word by Ctrl+C+C
-//   (c) 2019 Artem Avramenko. https://github.com/ArtemAvramenko/CopyCopyDict
+//   (c) 2023 Artem Avramenko. https://github.com/ArtemAvramenko/CopyCopyDict
 //   License: MIT
 // </copyright>
 
@@ -49,10 +49,22 @@ namespace CopyCopyDict
 
         private static void Browse(string text = null)
         {
-            var url = string.Format(
+            foreach (var urlPattern in new[] {
                 Properties.Settings.Default.UrlPattern,
-                text ?? string.Empty);
-            Process.Start(url);
+                Properties.Settings.Default.UrlPattern2,
+                Properties.Settings.Default.UrlPattern3,
+                Properties.Settings.Default.UrlPattern4
+            })
+            {
+                if (urlPattern == null || urlPattern.Trim().Length == 0)
+                {
+                    continue;
+                }
+                var url = string.Format(
+                    urlPattern.Trim(),
+                    text ?? string.Empty);
+                Process.Start(url);
+            }
         }
 
         private static void BrowseClipboardText()

@@ -3,7 +3,16 @@
   <Profiles />
   <Settings>
     <Setting Name="UrlPattern" Type="System.String" Scope="User">
-      <Value Profile="(Default)">https://www.multitran.com/m.exe?s={0}&amp;l1=1&amp;l2=2</Value>
+      <Value Profile="(Default)">https://context.reverso.net/перевод/английский-русский/{0}</Value>
+    </Setting>
+    <Setting Name="UrlPattern2" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="UrlPattern3" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="UrlPattern4" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
     </Setting>
   </Settings>
 </SettingsFile>

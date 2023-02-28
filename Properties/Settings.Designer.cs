@@ -12,7 +12,7 @@ namespace CopyCopyDict.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.5.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -25,13 +25,49 @@ namespace CopyCopyDict.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://www.multitran.com/m.exe?s={0}&l1=1&l2=2")]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://context.reverso.net/перевод/английский-русский/{0}")]
         public string UrlPattern {
             get {
                 return ((string)(this["UrlPattern"]));
             }
             set {
                 this["UrlPattern"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string UrlPattern2 {
+            get {
+                return ((string)(this["UrlPattern2"]));
+            }
+            set {
+                this["UrlPattern2"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string UrlPattern3 {
+            get {
+                return ((string)(this["UrlPattern3"]));
+            }
+            set {
+                this["UrlPattern3"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string UrlPattern4 {
+            get {
+                return ((string)(this["UrlPattern4"]));
+            }
+            set {
+                this["UrlPattern4"] = value;
             }
         }
     }
