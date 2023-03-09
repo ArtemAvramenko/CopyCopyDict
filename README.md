@@ -1,6 +1,8 @@
 # CopyCopyDict
 Background app that opens the definition or translation of a selected word with Ctrl+C+C
 
+![](./Resources/record.gif)
+
 [Releases](../../releases) page
 
 In the [CopyCopyDict.exe.config](../../blob/master/bin/Release/CopyCopyDict.exe.config) file, you can add one or more services by specifying languages and query format in the url pattern. For example:
