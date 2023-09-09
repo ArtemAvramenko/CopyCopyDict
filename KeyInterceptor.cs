@@ -124,9 +124,9 @@ namespace CopyCopyDict
             while (!_isDisposed)
             {
                 _listenerEvent.WaitOne();
-                if (!_isDisposed)
+                if (!_isDisposed && Pressed != null)
                 {
-                    Pressed?.Invoke();
+                    Pressed();
                 }
             }
         }

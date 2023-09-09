@@ -4,3 +4,6 @@ bin/Debug
 *.pdb
 
 /.vs
+*.vshost.exe*
+.suo
+*.suo

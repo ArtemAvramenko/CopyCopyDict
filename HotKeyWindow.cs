@@ -36,9 +36,10 @@ namespace CopyCopyDict
         {
             if (m.Msg == WM_HOTKEY &&
                 _isRegistered &&
-                m.WParam.ToInt32() == HotKeyId)
+                m.WParam.ToInt32() == HotKeyId &&
+                Pressed != null)
             {
-                Pressed?.Invoke();
+                Pressed();
             }
 
             base.WndProc(ref m);

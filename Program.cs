@@ -4,7 +4,10 @@
 //   License: MIT
 // </copyright>
 
+using System;
 using System.Diagnostics;
+using System.Drawing;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -14,7 +17,8 @@ namespace CopyCopyDict
     {
         public static void Main()
         {
-            using (var mutex = new Mutex(true, "CopyCopyDictRunning", out var mutexCreated))
+            bool mutexCreated;
+            using (var mutex = new Mutex(true, "CopyCopyDictRunning", out mutexCreated))
             {
                 if (!mutexCreated)
                 {
@@ -32,9 +36,27 @@ namespace CopyCopyDict
                 menu.Items.Add(openItem);
                 menu.Items.Add("-");
                 menu.Items.Add("Exit", null, (e, a) => Application.Exit());
+
+                var icon = Resources.Resources.Icon;
+                using (var g = Graphics.FromHwnd(IntPtr.Zero))
+                {
+                    var desktop = g.GetHdc();
+                    var logicalScreenHeight = GetDeviceCaps(desktop, (int)DeviceCap.VERTRES);
+                    var physicalScreenHeight = GetDeviceCaps(desktop, (int)DeviceCap.DESKTOPVERTRES);
+                    var dpiY = GetDeviceCaps(desktop, (int)DeviceCap.LOGPIXELSY);
+                    var scale = Math.Max(
+                        (double)physicalScreenHeight / logicalScreenHeight,
+                        (double)dpiY / 96);
+                    var iconSize = (int)Math.Round(16 * scale);
+                    if (Array.IndexOf(new[] { 16, 20, 24 }, iconSize) >= 0)
+                    {
+                        icon = new Icon(icon, iconSize, iconSize);
+                    }
+                }
+
                 var trayIcon = new NotifyIcon
                 {
-                    Icon = Resources.Resources.Icon,
+                    Icon = icon,
                     ContextMenuStrip = menu,
                     Visible = true
                 };
@@ -76,6 +98,15 @@ namespace CopyCopyDict
             }
             catch { }
             Browse(text);
+        }
+
+        [DllImport("gdi32.dll")]
+        static extern int GetDeviceCaps(IntPtr hdc, int nIndex);
+        public enum DeviceCap
+        {
+            VERTRES = 10,
+            DESKTOPVERTRES = 117,
+            LOGPIXELSY = 90
         }
     }
 }
