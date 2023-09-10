@@ -37,26 +37,9 @@ namespace CopyCopyDict
                 menu.Items.Add("-");
                 menu.Items.Add("Exit", null, (e, a) => Application.Exit());
 
-                var icon = Resources.Resources.Icon;
-                using (var g = Graphics.FromHwnd(IntPtr.Zero))
-                {
-                    var desktop = g.GetHdc();
-                    var logicalScreenHeight = GetDeviceCaps(desktop, (int)DeviceCap.VERTRES);
-                    var physicalScreenHeight = GetDeviceCaps(desktop, (int)DeviceCap.DESKTOPVERTRES);
-                    var dpiY = GetDeviceCaps(desktop, (int)DeviceCap.LOGPIXELSY);
-                    var scale = Math.Max(
-                        (double)physicalScreenHeight / logicalScreenHeight,
-                        (double)dpiY / 96);
-                    var iconSize = (int)Math.Round(16 * scale);
-                    if (Array.IndexOf(new[] { 16, 20, 24 }, iconSize) >= 0)
-                    {
-                        icon = new Icon(icon, iconSize, iconSize);
-                    }
-                }
-
                 var trayIcon = new NotifyIcon
                 {
-                    Icon = icon,
+                    Icon = GetTrayIcon(),
                     ContextMenuStrip = menu,
                     Visible = true
                 };
@@ -98,6 +81,37 @@ namespace CopyCopyDict
             }
             catch { }
             Browse(text);
+        }
+
+        private static Icon GetTrayIcon()
+        {
+            using (var g = Graphics.FromHwnd(IntPtr.Zero))
+            {
+                var desktop = g.GetHdc();
+                var logicalScreenHeight = GetDeviceCaps(desktop, (int)DeviceCap.VERTRES);
+                var physicalScreenHeight = GetDeviceCaps(desktop, (int)DeviceCap.DESKTOPVERTRES);
+                var dpiY = GetDeviceCaps(desktop, (int)DeviceCap.LOGPIXELSY);
+                var scale = Math.Max(
+                    (double)physicalScreenHeight / logicalScreenHeight,
+                    (double)dpiY / 96);
+                var iconSize = (int)Math.Round(16 * scale);
+                var assembly = System.Reflection.Assembly.GetExecutingAssembly();
+                var iconStream = assembly.GetManifestResourceStream("CopyCopyDict.Resources.Icon.ico");
+                if (Array.IndexOf(new[] { 16, 20, 24 }, iconSize) < 0)
+                {
+                    try
+                    {
+                        var bitmap = new Bitmap(iconStream);
+                        return Icon.FromHandle(bitmap.GetHicon());
+                    }
+                    catch
+                    {
+                    }
+
+                }
+                iconStream.Position = 0;
+                return new Icon(iconStream, iconSize, iconSize);
+            }
         }
 
         [DllImport("gdi32.dll")]
